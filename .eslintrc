@@ -1,0 +1,28 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "global-require": 0,
+    "new-cap": 0,
+    "react/forbid-prop-types": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "import/prefer-default-export": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack/webpack.dev.config"
+      }
+    }
+  },
+  "globals": {
+    "log": false,
+    "__DEV__": true,
+    "__LOG_LEVEL__": true,
+    "__VERSION__": false,
+    "__API_ROOT__": false
+  }
+}

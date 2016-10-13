@@ -1,0 +1,7 @@
+web:
+  image: registry.digitwalk.com/react-boilerplate:staging
+  ports:
+    - "3000:80"
+  environment:
+    - VIRTUAL_HOST=react-boilerplate.example.com
+  restart: always

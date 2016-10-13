@@ -1,0 +1,7 @@
+web:
+  image: registry.digitwalk.com/react-boilerplate:dist
+  ports:
+    - "3001:80"
+  environment:
+    - VIRTUAL_HOST=react-boilerplate.example.com
+  restart: always
