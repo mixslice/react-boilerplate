@@ -7,54 +7,14 @@ stages:
   - deploy
   - cleanup
 
-build_staging:
-  stage: build
-  script:
-    - npm run build
-    - docker build -t $IMAGE_NAME:staging -f Dockerfile.build .
-  only:
-    - develop
-    - /^release\/.*$/
-  tags:
-    - build
-
-push_staging:
-  stage: push
-  script:
-    - docker push $IMAGE_NAME:staging
-  only:
-    - develop
-    - /^release\/.*$/
-  tags:
-    - push
-
-deploy_staging:
-  stage: deploy
-  script:
-    - docker-compose -f staging.yml pull
-    - docker-compose -f staging.yml up -d
-  only:
-    - develop
-    - /^release\/.*$/
-  tags:
-    - staging
-
-cleanup_staging:
-  stage: cleanup
-  script:
-    - EMPTYIMAGE=$(docker images | awk '{print $1, $3}' | grep '^<none>' | awk '{print $2}') sh -c 'if [ ! -z "$EMPTYIMAGE" ]; then docker rmi $EMPTYIMAGE; fi'
-  only:
-    - develop
-    - /^release\/.*$/
-  tags:
-    - staging
-  allow_failure: true
-
 build_production:
   stage: build
   script:
-    - npm run build
-    - docker build -t $IMAGE_NAME:dist -f Dockerfile.build .
+    - docker build -t $IMAGE_NAME:build -f Dockerfile.build .
+    - docker create --name ${CI_BUILD_NAME}_${CI_BUILD_REF_NAME} $IMAGE_NAME:build
+    - docker cp ${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}:/usr/src/app/dist.tar.gz .
+    - docker rm ${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}
+    - docker build -t $IMAGE_NAME -f Dockerfile.prod .
   only:
     - master
   tags:
@@ -63,7 +23,7 @@ build_production:
 push_production:
   stage: push
   script:
-    - docker push $IMAGE_NAME:dist
+    - docker push $IMAGE_NAME
   only:
     - master
   tags:
@@ -72,8 +32,8 @@ push_production:
 deploy_production:
   stage: deploy
   script:
-    - docker-compose -f production.yml pull
-    - docker-compose -f production.yml up -d
+    - docker-compose -f docker-compose.prod.yml pull
+    - docker-compose -f docker-compose.prod.yml up -d
   only:
     - master
   tags:

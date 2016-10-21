@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    ports:
+      - "3000:80"
+    environment:
+      - VIRTUAL_HOST=react-boilerplate.example.com

@@ -1,0 +1,6 @@
+FROM smebberson/alpine-nginx
+
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+ADD /usr/src/app/dist.tar.gz /usr/share/nginx/html
+COPY /usr/src/app/data /usr/share/nginx/html/data
+COPY robots.txt /usr/share/nginx/html/

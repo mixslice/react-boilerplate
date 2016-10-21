@@ -2,15 +2,17 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import {
   App,
+  CounterApp,
+} from 'containers';
+import {
   NotFound,
-  CounterView,
   AboutView,
-} from 'views';
+} from 'components';
 
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={CounterView} />
+    <IndexRoute component={CounterApp} />
     <Route path="about" component={AboutView} />
     <Route path="*" component={NotFound} status={404} />
   </Route>
