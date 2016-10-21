@@ -11,5 +11,5 @@ COPY src /usr/src/app/src
 COPY webpack /usr/src/app/webpack
 COPY .babelrc /usr/src/app
 COPY webpack.config.js /usr/src/app
-RUN npm run build
+RUN yarn run build
 RUN tar zcvf dist.tar.gz dist

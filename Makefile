@@ -11,7 +11,7 @@ kill: stop
 	docker-compose rm
 
 compile:
-	npm run build
+	yarn run build
 
 prod_build: compile
 	docker-compose -f docker-compose.prod.yml build
