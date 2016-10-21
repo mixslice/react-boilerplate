@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "build:webpack": "NODE_ENV=production webpack --bail",
-    "build": "npm run clean && npm run build:webpack",
-    "prebuild": "npm install",
+    "build": "yarn run clean && yarn run build:webpack",
+    "prebuild": "yarn install",
     "start": "node server.js",
     "lint": "eslint --ext .jsx --ext .js src",
     "lintfix": "eslint --ext .jsx --ext .js src --fix"

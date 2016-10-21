@@ -7,12 +7,13 @@ A *new* Webpack boilerplate with:
 * [Redux](http://rackt.github.io/redux/) over Facebook flux
 * [react-router](https://github.com/rackt/react-router) as the router
 * [normalizr](https://github.com/gaearon/normalizr) as JSON serializer
+* [yarn](https://yarnpkg.com) as package manager
 
 ## Getting Started
 
 ```
-npm install
-npm start
+yarn install
+yarn run start
 open http://localhost:3000
 ```
 
