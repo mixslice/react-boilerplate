@@ -1,8 +1,11 @@
-app:
-  build: .
-  ports:
-    - "3000:3000"
-  volumes:
-    - .:/app
-  environment:
-    - VIRTUAL_HOST=react-boilerplate.docker
+version: "2"
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - VIRTUAL_HOST=react-boilerplate.docker
